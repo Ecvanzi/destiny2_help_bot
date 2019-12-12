@@ -1,5 +1,5 @@
-My_bot
-======
+Destiny2_help_bot
+=================
 
 Destiny2_help_bot - это телеграм бот созданный для помощи игрокам в Destiny2. 
 

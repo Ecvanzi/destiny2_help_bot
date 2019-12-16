@@ -1,9 +1,9 @@
 import logging
 
 
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from handlers import *
-
+from untils import keyboard
 
 import settings
 
@@ -20,7 +20,10 @@ def main():
     mybot = Updater(settings.API_KEY, request_kwargs = settings.PROXY)
     logging.info ('Бот запустился')
     dp = mybot.dispatcher
+
     dp.add_handler(CommandHandler("start", greet_user, pass_user_data=True))
+
+ 
     mybot.start_polling()
     mybot.idle()
 

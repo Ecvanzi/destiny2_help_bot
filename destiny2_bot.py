@@ -12,7 +12,6 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
                     filename='bot.log'
                     )
 
-
 def main():
     mybot = Updater(settings.API_KEY, request_kwargs = settings.PROXY)
     logging.info ('Бот запустился')

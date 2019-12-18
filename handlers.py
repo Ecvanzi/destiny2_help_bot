@@ -34,7 +34,6 @@ def where_Xur(bot, update, user_data):
         print(image.attrs) #чтобы понять что внутри и какие есть тэги и атрибуты
     else:
         update.message.reply_text("Возникла ошибка")
-
     
 def get_Xur(url):
     try:

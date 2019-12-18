@@ -8,4 +8,5 @@ def keyboard():
                                         ['Открытые мероприятия','Оружейная','Другое']],
                                         resize_keyboard= True)
 
+
     return my_keyboard

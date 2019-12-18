@@ -43,8 +43,3 @@ def get_Xur(url):
         return result.text
     except(requests.RequestException, ValueError):
         print('Сетевая ошибка')
-
-
-
-        
-

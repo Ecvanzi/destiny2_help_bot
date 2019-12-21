@@ -27,11 +27,11 @@ def where_Xur(bot, update, user_data):
         soup = BeautifulSoup(html, 'html.parser')
         Xur_place = soup.find('h4', class_="title").string
         update.message.reply_text(Xur_place)
-        image = soup.find('div', class_="et_pb_module et_pb_image et_pb_image_0").find("img")
+        image = soup.find('div', class_="et_pb_module et_pb_image et_pb_image_0").find('noscript')
         os.makedirs('downloads', exist_ok=True)
         print(image)
         #Xur_map = 
-        print(image.attrs) #чтобы понять что внутри и какие есть тэги и атрибуты
+        
     else:
         update.message.reply_text("Возникла ошибка")
     

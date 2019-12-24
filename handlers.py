@@ -11,16 +11,22 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 import cloudscraper
 
-def greet_user(bot, update, user_data):
+def greet_user(bot, update, context):
     text = '''
     Привет {}. Я бот-помощник по игре Destiny 2.
-    У меня ты можешь узнать какие испытания актуальны на этой неделе, "где Ксур?", какая сейчас неделя проклятья и как пройти рейд.'''.format(update.message.chat.first_name)
-    keyboard = [[InlineKeyboardButton("Где Зур?", callback_data='/Xur')]]
+    У меня ты можешь узнать какие испытания актуальны на этой неделе, "где Ксур?", какая сейчас неделя проклятья и как пройти рейд.
+    '''.format(update.message.chat.first_name)
+    keyboard = [
+        [
+        InlineKeyboardButton("Где Зур?", callback_data='/Xur')
+    ]
+    ]
     reply_markup = InlineKeyboardMarkup(keyboard)
+    update.message.reply_text(text, reply_markup=reply_markup)
 
-    update.message.reply_text(text,  reply_markup=reply_markup)
 
-def where_Xur(bot, update, user_data):
+
+def where_Xur(bot, update, context):
     scraper = cloudscraper.create_scraper(delay=5)
     update.message.reply_text('Обрабатываю запрос')
     html = get_Xur('https://whereisxur.com/')
@@ -43,7 +49,7 @@ def where_Xur(bot, update, user_data):
         update.message.reply_text(Xur_place)
         if Xur == 1:
             Xur_image_url = soup.find('div', class_="et_pb_module et_pb_image et_pb_image_0").find('noscript').find("img")["src"]
-            #os.makedirs('downloads', exist_ok=True)
+            
             Xur_map = scraper.get(Xur_image_url, stream = True)
             with open('xur_place.png', 'wb') as f:
                 f.write(Xur_map.content)
@@ -62,3 +68,4 @@ def get_Xur(url):
         return result.text
     except(requests.RequestException, ValueError):
         print('Сетевая ошибка')
+

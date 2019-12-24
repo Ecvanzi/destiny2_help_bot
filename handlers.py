@@ -11,7 +11,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 import cloudscraper
 
-def greet_user(bot, update, context):
+def greet_user(update, context):
     text = '''
     Привет {}. Я бот-помощник по игре Destiny 2.
     У меня ты можешь узнать какие испытания актуальны на этой неделе, "где Ксур?", какая сейчас неделя проклятья и как пройти рейд.
@@ -26,7 +26,7 @@ def greet_user(bot, update, context):
 
 
 
-def where_Xur(bot, update, context):
+def where_Xur(update, context):
     scraper = cloudscraper.create_scraper(delay=5)
     update.message.reply_text('Обрабатываю запрос')
     html = get_Xur('https://whereisxur.com/')

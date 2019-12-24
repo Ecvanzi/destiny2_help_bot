@@ -21,16 +21,35 @@ def greet_user(bot, update, user_data):
     update.message.reply_text(text,  reply_markup=reply_markup)
 
 def where_Xur(bot, update, user_data):
+    scraper = cloudscraper.create_scraper(delay=5)
     update.message.reply_text('Обрабатываю запрос')
     html = get_Xur('https://whereisxur.com/')
+    Xur = 1
     if html:
         soup = BeautifulSoup(html, 'html.parser')
         Xur_place = soup.find('h4', class_="title").string
+        xp = Xur_place.replace("!", "").split(' ')
+        if 'Titan' in xp :
+            Xur_place = 'Зур прибыл на Титан.'
+        elif 'Earth' in xp :
+            Xur_place = "Зур прибыл на Землю."
+        elif 'Nessus' in xp:
+            Xur_place = 'Зур прибыл на Несс.'
+        elif 'Io' in xp:
+            Xur_place = 'Зур брибыл на Ио.'
+        else :
+            Xur_place = 'Зур отправился за новой партией экзотиков.'
+            Xur = 0
         update.message.reply_text(Xur_place)
-        image = soup.find('div', class_="et_pb_module et_pb_image et_pb_image_0").find('noscript')
-        os.makedirs('downloads', exist_ok=True)
-        print(image)
-        #Xur_map = 
+        if Xur == 1:
+            Xur_image_url = soup.find('div', class_="et_pb_module et_pb_image et_pb_image_0").find('noscript').find("img")["src"]
+            #os.makedirs('downloads', exist_ok=True)
+            Xur_map = scraper.get(Xur_image_url, stream = True)
+            with open('xur_place.png', 'wb') as f:
+                f.write(Xur_map.content)
+            bot.send_photo(chat_id=update.message.chat.id, photo=open('xur_place.png', 'rb'))
+        else: 
+            update.message.reply_text('Картинки тоже не будет')
         
     else:
         update.message.reply_text("Возникла ошибка")

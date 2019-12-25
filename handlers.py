@@ -9,7 +9,6 @@ from untils import keyboard
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 
-import cloudscraper
 
 def greet_user(update, context):
     text = '''
@@ -18,11 +17,18 @@ def greet_user(update, context):
     '''.format(update.message.chat.first_name)
     keyboard = [
         [
-        InlineKeyboardButton("Где Зур?", callback_data='/Xur')
-    ]
-    ]
+        InlineKeyboardButton("Где Зур?", callback_data='Xur'),
+        InlineKeyboardButton('Испытания', callback_data='challenge'),
+        InlineKeyboardButton('Рейды', callback_data='raids')
+        ],
+        [
+        InlineKeyboardButton('Оружейная', callback_data='weapon_list'),
+        InlineKeyboardButton('Гардероб', callback_data='armory'),
+        InlineKeyboardButton('Другое', callback_data='other')
+        ]
+        ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text(text, reply_markup=reply_markup)
+    update.message.reply_text(text + "Выбирай категорию:", reply_markup=reply_markup)
 
 
 
@@ -53,9 +59,11 @@ def where_Xur(update, context):
             Xur_map = scraper.get(Xur_image_url, stream = True)
             with open('xur_place.png', 'wb') as f:
                 f.write(Xur_map.content)
-            bot.send_photo(chat_id=update.message.chat.id, photo=open('xur_place.png', 'rb'))
+            context.bot.send_photo(chat_id=update.message.chat.id, photo=open('xur_place.png', 'rb'))
         else: 
             update.message.reply_text('Картинки тоже не будет')
+            
+        
         
     else:
         update.message.reply_text("Возникла ошибка")
@@ -69,3 +77,6 @@ def get_Xur(url):
     except(requests.RequestException, ValueError):
         print('Сетевая ошибка')
 
+def Start_buttons(update, context):
+    query = update.callback_query
+    print(query.data)

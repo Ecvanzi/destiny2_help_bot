@@ -19,9 +19,9 @@ def main():
     dp = mybot.dispatcher
 
     dp.add_handler(CommandHandler("start", greet_user, pass_user_data=True))
-    dp.add_handler(CommandHandler('Xur', where_Xur, pass_user_data=True))
-    dp.add_handler(CommandHandler('challenge', where_Xur, pass_user_data= True))
-    dp.add_handler(CallbackQueryHandler(Start_buttons, pass_user_data=True))
+    dp.add_handler(CallbackQueryHandler(where_Xur, pass_user_data=True, pattern = 'Xur'))
+
+
     mybot.start_polling()
     mybot.idle()
 

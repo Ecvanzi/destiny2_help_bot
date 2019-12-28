@@ -19,7 +19,6 @@ Install and update using `pip`_:
 
 Создайте файл settings.py и добавьте в него следующие настройки:
 
-.. code-block:: python
 
     PROXY = {'proxy_url': 'socks5://ВАШ_SOCKS5_ПРОКСИ:1080',
         'urllib3_proxy_kwargs': {'username': 'ЛОГИН', 'password': 'ПАРОЛЬ'}}

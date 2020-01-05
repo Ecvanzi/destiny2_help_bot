@@ -18,7 +18,11 @@ Destiny2_help_bot - это телеграм бот созданный для п�
 
 Создайте файл settings.py и добавьте в него следующие настройки:
 
+    import os
+    basedir = os.path.abspath(os.path.dirname(__file__))
 
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, '..', 'ds2_bot.db')
+    
     PROXY = {'proxy_url': 'socks5://ВАШ_SOCKS5_ПРОКСИ:1080',
         'urllib3_proxy_kwargs': {'username': 'ЛОГИН', 'password': 'ПАРОЛЬ'}}
 

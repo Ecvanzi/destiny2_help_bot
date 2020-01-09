@@ -4,9 +4,9 @@ import settings
 
 def keyboard():
     my_keyboard = ReplyKeyboardMarkup([
-                                        ['Испытания','Город грез', 'Рейды'],
-                                        ['Открытые мероприятия','Оружейная','Другое']],
-                                        resize_keyboard= True)
+                                        ['Зур','Испытания', 'Рейды'],
+                                        ['Оружейная','Гардероб','Другое']],
+                                        resize_keyboard= True, one_time_keyboard=True)
 
 
     return my_keyboard

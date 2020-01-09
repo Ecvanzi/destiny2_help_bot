@@ -20,12 +20,12 @@ def main():
     dp = mybot.dispatcher
     
     dp.add_handler(CommandHandler("start", greet_user, pass_user_data=True))
-    dp.add_handler(CallbackQueryHandler(where_Xur, pass_user_data=True, pattern = 'Xur'))
-    #dp.add_handler(CallbackQueryHandler(, pass_user_data=True, pattern = 'challenge'))
-    #dp.add_handler(CallbackQueryHandler(, pass_user_data=True, pattern = 'raids'))
-    #dp.add_handler(CallbackQueryHandler(, pass_user_data=True, pattern = 'weapon_list'))
-    #dp.add_handler(CallbackQueryHandler(, pass_user_data=True, pattern = 'armory'))
-    #dp.add_handler(CallbackQueryHandler(, pass_user_data=True, pattern = 'other'))
+    dp.add_handler(CallbackQueryHandler(where_xur, pass_user_data=True, pattern = 'Xur'))
+    #dp.add_handler(CallbackQueryHandler(challenge, pass_user_data=True, pattern = 'challenge'))
+    #dp.add_handler(CallbackQueryHandler(raids, pass_user_data=True, pattern = 'raids'))
+    #dp.add_handler(CallbackQueryHandler(weapon_list, pass_user_data=True, pattern = 'weapon_list'))
+    #dp.add_handler(CallbackQueryHandler(armory, pass_user_data=True, pattern = 'armory'))
+    #dp.add_handler(CallbackQueryHandler(other, pass_user_data=True, pattern = 'other'))
 
 
     mybot.start_polling()

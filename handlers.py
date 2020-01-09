@@ -1,6 +1,6 @@
 
 from telegram.ext import Updater
-
+from datetime import *
 
 import os
 
@@ -34,3 +34,20 @@ def main_keyboard(update):
         ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     update.message.reply_text("Выбирай категорию:", reply_markup=reply_markup)
+
+def key_keyboard(update, context):
+    query = update.callback_query
+    keyboard = [
+        [
+        InlineKeyboardButton("Где Зур?", callback_data='Xur'),
+        InlineKeyboardButton('Испытания', callback_data='challenge'),
+        InlineKeyboardButton('Рейды', callback_data='raids')
+        ],
+        [
+        InlineKeyboardButton('Оружейная', callback_data='weapon_list'),
+        InlineKeyboardButton('Гардероб', callback_data='armory'),
+        InlineKeyboardButton('Другое', callback_data='other')
+        ]
+        ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    context.bot.send_message(chat_id=query.message.chat.id,text = "Выбирай категорию:", reply_markup=reply_markup)

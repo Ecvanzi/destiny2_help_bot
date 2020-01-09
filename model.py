@@ -1,8 +1,11 @@
-from sqlalchemy import *
+from sqlalchemy import Column, String, Integer, Text
+from sqlalchemy.ext.declarative import declarative_base
 
-md = MetaData()
 
-Xur_tab = Table('Xur_tab', md,
-    Column('id', Integer, primary_key=True),
-    Column('Xur_place', Text, nullable=False)
-)
+Base = declarative_base()
+
+class Xur_tab(Base):
+    __tablename__ = 'Xur_tab'
+
+    id = Column(Integer, primary_key=True)
+    Xur_place = Column(Text)

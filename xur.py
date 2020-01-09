@@ -3,10 +3,13 @@ import requests
 import cloudscraper
 import os
 
+from settings import SQLALCHEMY_DATABASE_URI
 from model import Xur_tab, md
 from bs4 import BeautifulSoup
+from sqlalchemy import *
+from sqlalchemy.orm import sessionmaker
 
-
+engine = create_engine(SQLALCHEMY_DATABASE_URI)
 
 def where_Xur(update, context):
     query = update.callback_query
@@ -29,7 +32,7 @@ def where_Xur(update, context):
         else :
             Xur_place = 'Зур отправился за новой партией экзотиков.'
             Xur = 0
-        #save_xur(Xur_place)
+        save_xur(Xur_place)
         context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(Xur_place))
         
         if Xur == 1:
@@ -57,6 +60,8 @@ def get_Xur(url):
         print('Сетевая ошибка')
 
 def save_xur(Xur_place):
+    Session = sessionmaker()
+    Session.configure(bind=engine)
     new_Xur_place = Xur_tab(Xur_place= Xur_place)
     md.session.add(new_Xur_place)
     md.session.commit()

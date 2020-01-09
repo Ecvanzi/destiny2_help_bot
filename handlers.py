@@ -14,6 +14,12 @@ def greet_user(update, context):
     Привет {}. Я бот-помощник по игре Destiny 2.
     У меня ты можешь узнать какие испытания актуальны на этой неделе, "где Зур?", какая сейчас неделя проклятья и как пройти рейд.
     '''.format(update.message.chat.first_name)
+    update.message.reply_text(text)
+    main_keyboard(update)
+    
+    
+
+def main_keyboard(update):
     keyboard = [
         [
         InlineKeyboardButton("Где Зур?", callback_data='Xur'),
@@ -27,7 +33,4 @@ def greet_user(update, context):
         ]
         ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text(text + "Выбирай категорию:", reply_markup=reply_markup)
-
-
-
+    update.message.reply_text("Выбирай категорию:", reply_markup=reply_markup)

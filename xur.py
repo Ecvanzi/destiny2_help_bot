@@ -32,7 +32,7 @@ def where_Xur(update, context):
         else :
             Xur_place = 'Зур отправился за новой партией экзотиков.'
             Xur = 0
-        save_xur(Xur_place)
+        #save_xur(Xur_place)
         context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(Xur_place))
         
         if Xur == 1:
@@ -43,12 +43,12 @@ def where_Xur(update, context):
                 f.write(Xur_map.content)
             context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_place.png', 'rb'))
         else: 
-            context.bot.send_message(chat_id=query.message.chat.id , text ='Картинки тоже не будет')
-            
-        
-        
+            context.bot.send_message(chat_id=query.message.chat.id , text ='Картинки тоже не будет')    
     else:
         context.bot.send_message(chat_id=query.message.chat.id, text ="Возникла ошибка")
+    
+    
+    
     
 def get_Xur(url):
     try:

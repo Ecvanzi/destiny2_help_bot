@@ -7,7 +7,7 @@ from datetime import *
 from settings import SQLALCHEMY_DATABASE_URI
 from model import Xur_tab
 from bs4 import BeautifulSoup
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, update
 from sqlalchemy.orm import sessionmaker
 from handlers import key_keyboard
 
@@ -20,7 +20,7 @@ def where_xur(update, context):
     query = update.callback_query
     context.bot.edit_message_text(chat_id=query.message.chat.id, message_id= query.message.message_id, text ='Где Зур')
     date_now = datetime.today().isoweekday()
-    if date_now == 1 or date_now > 4:
+    if date_now == 1 or date_now > 2:
         scraper = cloudscraper.create_scraper(delay=5)
         context.bot.send_message(chat_id=query.message.chat.id, text='Обрабатываю запрос')
         html = get_xur('https://whereisxur.com/')
@@ -71,5 +71,6 @@ def get_xur(url):
 
 def save_xur(Xur_place):
     new_xur_place = Xur_tab(Xur_place= Xur_place)
-    session.add(new_xur_place)
+    update(Xur_tab).where(Xur_tab.c.id==1).\
+        values(Xur_place= Xur_place)
     session.commit()

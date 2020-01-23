@@ -27,8 +27,8 @@ def main_keyboard(update):
         InlineKeyboardButton('Рейды', callback_data='raids')
         ],
         [
-        InlineKeyboardButton('Оружейная', callback_data='weapon_list'),
-        InlineKeyboardButton('Гардероб', callback_data='armory'),
+        InlineKeyboardButton('Оружейная/Гардероб', callback_data='weapon_list'),
+        InlineKeyboardButton('Открытые мероприятия', callback_data='events'),
         InlineKeyboardButton('Другое', callback_data='other')
         ]
         ]
@@ -44,8 +44,8 @@ def key_keyboard(update, context):
         InlineKeyboardButton('Рейды', callback_data='raids')
         ],
         [
-        InlineKeyboardButton('Оружейная', callback_data='weapon_list'),
-        InlineKeyboardButton('Гардероб', callback_data='armory'),
+        InlineKeyboardButton('Оружейная/Гардероб', callback_data='weapon_list'),
+        InlineKeyboardButton('Открытые мероприятия', callback_data='events'),
         InlineKeyboardButton('Другое', callback_data='other')
         ]
         ]

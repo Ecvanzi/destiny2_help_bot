@@ -1,12 +1,20 @@
 import requests
 
 import cloudscraper
+import schedule
 import os
+import time
 from datetime import *
 
 from bs4 import BeautifulSoup
 from handlers import key_keyboard
-from mongodb import save_xur_place, save_xur_weapon, db
+from mongodb import save_xur_place,save_xur_img, save_xur_weapon, db
+
+def xur_here(update, context):
+    where_xur(update, context)
+    xur_weapon(update, context)
+
+schedule.every().day.at("20:00").do(xur_here)
 
 def all_xur(update, context):
     query = update.callback_query
@@ -14,13 +22,21 @@ def all_xur(update, context):
     date_now = datetime.today().isoweekday()
     Xur_place = "Зур уехал, приедет в пятницу в 20:00."    
 
-    if date_now == 1 or date_now > 4:
-        where_xur(update, context)
+    if date_now == 1 or date_now > 2:
 
         xur_point = db.xur_tab.find_one({}, {"xur_place": 1, "_id":0})
         context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_point['xur_place']))
-        xur_weapon(update, context)
-        
+        context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_img/xur_place.png', 'rb'))
+
+        xur_weapon_db = db.xur_tab.find_one({}, {'xur_first_weapon': 1, "xur_second_weapon": 1, "xur_third_weapon": 1, "xur_fourth_weapon": 1, "_id":0})
+        context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_weapon_db['xur_first_weapon']))    
+        context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_img/img_first_weapon.png', 'rb'))
+        context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_weapon_db['xur_second_weapon']))       
+        context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_img/img_second_weapon.png', 'rb'))
+        context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_weapon_db['xur_third_weapon']))       
+        context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_img/img_third_weapon.png', 'rb'))
+        context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_weapon_db['xur_fourth_weapon']))       
+        context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_img/img_fourth_weapon.png', 'rb'))
         
     else:
         save_xur_place(db, Xur_place)
@@ -42,7 +58,7 @@ def get_xur(url):
         print('Сетевая ошибка')
 
 def xur_weapon(update, context):
-    query = update.callback_query
+    #query = update.callback_query
     scraper = cloudscraper.create_scraper(
             delay=5, 
             recaptcha={'provider': 'return_response'}
@@ -53,36 +69,36 @@ def xur_weapon(update, context):
     xur_first_weapon = soup.find('div', class_="et_pb_blurb_0").find('h4', class_='et_pb_module_header').find('span').string
     url_first_weapon = soup.find('div', class_="et_pb_blurb_0").find('noscript').find("img")["src"]
     first_img = scraper.get(url_first_weapon, stream = True)
-    context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_first_weapon))
+    #context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_first_weapon))
     first_img = scraper.get(url_first_weapon, stream = True)
-    with open('img_first_weapon.png', 'wb') as f:
+    with open('xur_img/img_first_weapon.png', 'wb') as f:
                 f.write(first_img.content)
-    context.bot.send_photo(chat_id=query.message.chat.id, photo=open('img_first_weapon.png', 'rb'))
+    #context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_img/img_first_weapon.png', 'rb'))
 
     xur_second_weapon = soup.find('div', class_="et_pb_blurb_1").find('h4', class_='et_pb_module_header').find('span').string
     url_second_weapon = soup.find('div', class_="et_pb_blurb_1").find('noscript').find("img")["src"]
-    context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_second_weapon))
+    #context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_second_weapon))
     second_img = scraper.get(url_second_weapon, stream = True)
-    with open('img_second_weapon.png', 'wb') as f:
+    with open('xur_img/img_second_weapon.png', 'wb') as f:
                 f.write(second_img.content)
-    context.bot.send_photo(chat_id=query.message.chat.id, photo=open('img_second_weapon.png', 'rb'))
+    #context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_img/img_second_weapon.png', 'rb'))
 
     xur_third_weapon = soup.find('div', class_="et_pb_blurb_2").find('h4', class_='et_pb_module_header').find('span').string
     url_third_weapon = soup.find('div', class_="et_pb_blurb_2").find('noscript').find("img")["src"]
-    context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_third_weapon))
+    #context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_third_weapon))
     third_img = scraper.get(url_third_weapon, stream = True)
-    with open('img_third_weapon.png', 'wb') as f:
+    with open('xur_img/img_third_weapon.png', 'wb') as f:
                 f.write(third_img.content)
-    context.bot.send_photo(chat_id=query.message.chat.id, photo=open('img_third_weapon.png', 'rb'))
+    #context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_img/img_third_weapon.png', 'rb'))
 
     xur_fourth_weapon = soup.find('div', class_="et_pb_blurb_3").find('h4', class_='et_pb_module_header').find('span').string
     url_fourth_weapon = soup.find('div', class_="et_pb_blurb_3").find('noscript').find("img")["src"]
-    context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_fourth_weapon))
+    #context.bot.send_message(chat_id=query.message.chat.id, text='{}'.format(xur_fourth_weapon))
     fourth_img = scraper.get(url_fourth_weapon, stream = True)
-    with open('img_fourth_weapon.png', 'wb') as f:
+    with open('xur_img/img_fourth_weapon.png', 'wb') as f:
                 f.write(fourth_img.content)
-    context.bot.send_photo(chat_id=query.message.chat.id, photo=open('img_fourth_weapon.png', 'rb'))
-    save_xur_weapon(db, xur_first_weapon, url_first_weapon, xur_second_weapon, url_second_weapon, xur_third_weapon, url_third_weapon, xur_fourth_weapon, url_fourth_weapon)
+    #context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_img/img_fourth_weapon.png', 'rb'))
+    save_xur_weapon(db, xur_first_weapon, xur_second_weapon, xur_third_weapon, xur_fourth_weapon)
 
 
 
@@ -111,14 +127,18 @@ def where_xur(update, context):
             Xur_place = 'Зур прибудет в пятницу в 20:00.'
             Xur = 0
         save_xur_place(db, Xur_place)
-        if Xur == 1:
-            Xur_image_url = soup.find('div', class_="et_pb_module et_pb_image et_pb_image_0").find('noscript').find("img")["src"]
-                    
-            Xur_map = scraper.get(Xur_image_url, stream = True)
-            with open('xur_place.png', 'wb') as f:
-                    f.write(Xur_map.content)
-            context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_place.png', 'rb'))
-        else: 
-            context.bot.send_message(chat_id=query.message.chat.id , text ='Картинки тоже не будет')    
+        #if Xur == 1:
+        Xur_image_url = soup.find('div', class_="et_pb_module et_pb_image et_pb_image_0").find('noscript').find("img")["src"]
+        save_xur_img(db, Xur_image_url)       
+        Xur_map = scraper.get(Xur_image_url, stream = True)
+        with open('xur_img/xur_place.png', 'wb') as f:
+                f.write(Xur_map.content)
+            #context.bot.send_photo(chat_id=query.message.chat.id, photo=open('xur_img/xur_place.png', 'rb'))
+        #else: 
+            #context.bot.send_message(chat_id=query.message.chat.id , text ='Картинки тоже не будет')    
     else:
         context.bot.send_message(chat_id=query.message.chat.id, text ="Возникла ошибка")
+
+def xur_here(update, context):
+    where_xur(update, context)
+    xur_weapon(update, context)

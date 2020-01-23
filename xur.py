@@ -14,7 +14,7 @@ def xur_here(update, context):
     where_xur(update, context)
     xur_weapon(update, context)
 
-schedule.every().day.at("20:00").do(xur_here)
+schedule.every().day.at("18:20").do(xur_here)
 
 def all_xur(update, context):
     query = update.callback_query
@@ -139,6 +139,3 @@ def where_xur(update, context):
     else:
         context.bot.send_message(chat_id=query.message.chat.id, text ="Возникла ошибка")
 
-def xur_here(update, context):
-    where_xur(update, context)
-    xur_weapon(update, context)

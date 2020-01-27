@@ -8,3 +8,4 @@ ikelos
 ds2_bot.db
 save_Xur.py
 /xur_img
+celery*.*

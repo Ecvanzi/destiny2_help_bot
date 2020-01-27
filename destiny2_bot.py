@@ -22,7 +22,7 @@ def main():
     
     dp.add_handler(CommandHandler("start", greet_user, pass_user_data=True))
     dp.add_handler(CallbackQueryHandler(all_xur, pass_user_data=True, pattern = 'Xur'))
-    #dp.add_handler(CallbackQueryHandler(challenge, pass_user_data=True, pattern = 'challenge'))
+    dp.add_handler(CallbackQueryHandler(xur_here, pass_user_data=True, pattern = 'challenge'))
     #dp.add_handler(CallbackQueryHandler(raids, pass_user_data=True, pattern = 'raids'))
     #dp.add_handler(CallbackQueryHandler(weapon_list, pass_user_data=True, pattern = 'weapon_list'))
     dp.add_handler(CallbackQueryHandler(events, pass_user_data=True, pattern = 'events'))

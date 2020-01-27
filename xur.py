@@ -1,7 +1,7 @@
 import requests
 
 import cloudscraper
-import schedule
+
 import os
 import time
 from datetime import *
@@ -11,10 +11,10 @@ from handlers import key_keyboard
 from mongodb import save_xur_place,save_xur_img, save_xur_weapon, db
 
 def xur_here(update, context):
-    where_xur(update, context)
-    xur_weapon(update, context)
+    where_xur()
+    xur_weapon()
 
-schedule.every().day.at("18:20").do(xur_here)
+
 
 def all_xur(update, context):
     query = update.callback_query
@@ -57,7 +57,7 @@ def get_xur(url):
     except(requests.RequestException, ValueError):
         print('Сетевая ошибка')
 
-def xur_weapon(update, context):
+def xur_weapon():
     scraper = cloudscraper.create_scraper(
             delay=5, 
             recaptcha={'provider': 'return_response'}
@@ -93,13 +93,13 @@ def xur_weapon(update, context):
 
 
 
-def where_xur(update, context):
-    query = update.callback_query
+def where_xur():
+    #query = update.callback_query
     scraper = cloudscraper.create_scraper(
             delay=5, 
             recaptcha={'provider': 'return_response'}
     )
-    context.bot.send_message(chat_id=query.message.chat.id, text='Обрабатываю запрос')
+    #context.bot.send_message(chat_id=query.message.chat.id, text='Обрабатываю запрос')
     html = get_xur('https://whereisxur.com/')
     if html:
         soup = BeautifulSoup(html, 'html.parser')
@@ -125,5 +125,6 @@ def where_xur(update, context):
                 f.write(Xur_map.content)
 
     else:
-        context.bot.send_message(chat_id=query.message.chat.id, text ="Возникла ошибка")
+        #context.bot.send_message(chat_id=query.message.chat.id, text ="Возникла ошибка")
+        Xur_place = "Возникла ошибка при работе бота."
 

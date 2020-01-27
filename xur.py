@@ -94,12 +94,10 @@ def xur_weapon():
 
 
 def where_xur():
-    #query = update.callback_query
     scraper = cloudscraper.create_scraper(
             delay=5, 
             recaptcha={'provider': 'return_response'}
     )
-    #context.bot.send_message(chat_id=query.message.chat.id, text='Обрабатываю запрос')
     html = get_xur('https://whereisxur.com/')
     if html:
         soup = BeautifulSoup(html, 'html.parser')
@@ -125,6 +123,5 @@ def where_xur():
                 f.write(Xur_map.content)
 
     else:
-        #context.bot.send_message(chat_id=query.message.chat.id, text ="Возникла ошибка")
         Xur_place = "Возникла ошибка при работе бота."
 

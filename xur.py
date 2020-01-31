@@ -71,7 +71,7 @@ def xur_weapon():
     soup = BeautifulSoup(html, 'html.parser')
     xur_first_weapon = soup.find('div', class_="et_pb_blurb_0").find('h4', class_='et_pb_module_header').find('span').string
     url_first_weapon = soup.find('div', class_="et_pb_blurb_0").find('noscript').find("img")["src"]
-    first_img = scraper.get(url_first_weapon, stream = True)
+    
     first_img = scraper.get(url_first_weapon, stream = True)
     with open('xur_img/img_first_weapon.png', 'wb') as f:
                 f.write(first_img.content)

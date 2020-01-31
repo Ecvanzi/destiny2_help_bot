@@ -7,12 +7,16 @@ import time
 from datetime import *
 
 from bs4 import BeautifulSoup
-from handlers import key_keyboard
+from handlers import key_keyboard, xur_keyboard
 from mongodb import save_xur_place,save_xur_img, save_xur_weapon, db
 
 def xur_here(update, context):
+    query = update.callback_query
+    context.bot.send_message(chat_id=query.message.chat.id, text='Обновляю данные')
     where_xur()
     xur_weapon()
+    context.bot.send_message(chat_id=query.message.chat.id, text='Данные обновлены')
+    xur_keyboard(update, context)
 
 
 
@@ -111,7 +115,7 @@ def where_xur():
         elif 'Nessus' in xp:
             Xur_place = 'Зур прибыл на Несс. Будет ждать тебя до 20:00 вторника.'
         elif 'IO' in xp:
-            Xur_place = 'Зур брибыл на Ио. Будет ждать тебя до 20:00 вторника.'
+            Xur_place = 'Зур прибыл на Ио. Будет ждать тебя до 20:00 вторника.'
         else :
             Xur_place = 'Зур прибудет в пятницу в 20:00.'
             Xur = 0

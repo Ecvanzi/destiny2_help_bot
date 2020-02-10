@@ -19,5 +19,4 @@ def save_xur_weapon(db, xur_first_weapon, xur_second_weapon, xur_third_weapon, x
         "xur_second_weapon": xur_second_weapon , 
         "xur_third_weapon": xur_third_weapon , 
         "xur_fourth_weapon": xur_fourth_weapon 
-
-}},False, True)
+    }},False, True)

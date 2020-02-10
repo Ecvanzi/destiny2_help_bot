@@ -157,7 +157,7 @@ def energo_exotic(update, context):
         InlineKeyboardButton('Полярное копье', callback_data='polaris_lance')
         ],
         [
-        InlineKeyboardButton('тройственный гуль', callback_data='trinity_ghoul'),
+        InlineKeyboardButton('Тройственный гуль', callback_data='trinity_ghoul'),
         InlineKeyboardButton('Волнолом', callback_data='wavesplitter')
         ],
         [

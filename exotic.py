@@ -10,7 +10,7 @@ def get_exotic_weapon(update, context):
     context.bot.send_message(chat_id=query.message.chat.id, text = 'Название: {}'.format(weapon['name']))
     context.bot.send_message(chat_id=query.message.chat.id, text = 'Тип оружия: {}'.format(weapon['type']))
     weapon_perks(update, context, weapon_name)
-    bow_weapon(update, context, weapon_name)
+    type_weapon(update, context, weapon_name)
     context.bot.send_message(chat_id=query.message.chat.id, text = 'Катализатор: {}'.format(weapon['catalyst']))
     context.bot.send_message(chat_id=query.message.chat.id, text = 'Где достать: {}'.format(weapon['drop']))
     e_weapon_menu(update, context)
@@ -40,7 +40,7 @@ def weapon_perks(update, context, weapon_name):
     else:
         context.bot.send_message(chat_id=query.message.chat.id, text = 'Возникла ошибка')
 
-def bow_weapon(update, context, weapon_name):
+def type_weapon(update, context, weapon_name):
     query = update.callback_query
     bow = db.exotic_weapons.find_one({'eng_name': weapon_name}, {'type':1, "_id":0})
     weapon_type = bow['type']

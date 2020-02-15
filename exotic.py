@@ -1,6 +1,6 @@
 from mongodb import db
 from handlers import key_keyboard
-from exotic_keyboard import *
+from exotic_keyboard import e_weapon_menu, e_armor_menu
 
 def get_exotic_weapon(update, context):
     query = update.callback_query

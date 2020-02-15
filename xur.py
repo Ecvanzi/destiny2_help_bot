@@ -4,7 +4,7 @@ import cloudscraper
 
 import os
 import time
-from datetime import *
+from datetime import datetime
 
 from bs4 import BeautifulSoup
 from handlers import key_keyboard, xur_keyboard
@@ -104,27 +104,27 @@ def where_xur():
     html = get_xur('https://whereisxur.com/')
     if html:
         soup = BeautifulSoup(html, 'html.parser')
-        Xur_place = soup.find('h4', class_="title").string
-        xp = Xur_place.replace("!", "").split(' ')
-        Xur = 1
+        xur_place = soup.find('h4', class_="title").string
+        xp = xur_place.replace("!", "").split(' ')
+        
         if 'Titan' in xp :
-            Xur_place = 'Зур прибыл на Титан. Будет ждать тебя до 20:00 вторника.'
+            xur_place = 'Зур прибыл на Титан. Будет ждать тебя до 20:00 вторника.'
         elif 'EDZ' in xp :
-            Xur_place = "Зур прибыл на Землю. Будет ждать тебя до 20:00 вторника."
+            xur_place = "Зур прибыл на Землю. Будет ждать тебя до 20:00 вторника."
         elif 'Nessus' in xp:
-            Xur_place = 'Зур прибыл на Несс. Будет ждать тебя до 20:00 вторника.'
+            xur_place = 'Зур прибыл на Несс. Будет ждать тебя до 20:00 вторника.'
         elif 'IO' in xp:
-            Xur_place = 'Зур прибыл на Ио. Будет ждать тебя до 20:00 вторника.'
+            xur_place = 'Зур прибыл на Ио. Будет ждать тебя до 20:00 вторника.'
         else :
-            Xur_place = 'Зур прибудет в пятницу в 20:00.'
-            Xur = 0
-        save_xur_place(db, Xur_place)
-        Xur_image_url = soup.find('div', class_="et_pb_module et_pb_image et_pb_image_0").find('noscript').find("img")["src"]
-        save_xur_img(db, Xur_image_url)       
-        Xur_map = scraper.get(Xur_image_url, stream = True)
+            xur_place = 'Зур прибудет в пятницу в 20:00.'
+            
+        save_xur_place(db, xur_place)
+        xur_image_url = soup.find('div', class_="et_pb_module et_pb_image et_pb_image_0").find('noscript').find("img")["src"]
+        save_xur_img(db, xur_image_url)       
+        xur_map = scraper.get(xur_image_url, stream = True)
         with open('xur_img/xur_place.png', 'wb') as f:
-                f.write(Xur_map.content)
+                f.write(xur_map.content)
 
     else:
-        Xur_place = "Возникла ошибка при работе бота."
+        xur_place = "Возникла ошибка при работе бота."
 

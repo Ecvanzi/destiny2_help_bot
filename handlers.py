@@ -22,7 +22,7 @@ def greet_user(update, context):
 def main_keyboard(update):
     keyboard = [
         [
-        InlineKeyboardButton("Где Зур?", callback_data='Xur'),
+        InlineKeyboardButton("Где Зур?", callback_data='xur'),
         InlineKeyboardButton('Экзотики', callback_data='exotic'),
         InlineKeyboardButton('(Не работает)Рейды', callback_data='raids')
         ],

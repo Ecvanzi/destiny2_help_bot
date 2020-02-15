@@ -2,12 +2,14 @@ import logging
 
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters,  CallbackQueryHandler, ConversationHandler
-from handlers import *
-from xur import *
-from events import *
+from handlers import greet_user, main_keyboard, key_keyboard, xur_keyboard
+from xur import xur_here, all_xur, where_xur, xur_keyboard
+from events import get_event
+from events_keyboards import events_keyboard
 #from armory import *
 #from armory_keyboard import weapon_list
-from exotic import *
+from exotic import get_exotic_armor, get_exotic_weapon
+from exotic_keyboard import warlock_exotic, titan_exotic, heavy_exotic, hunter_exotic, kinetic_exotic, energo_exotic, exotic_keyboard, exot_armor, exot_weapon
 
 import settings
 
@@ -23,7 +25,7 @@ def main():
     dp = mybot.dispatcher
     
     dp.add_handler(CommandHandler("start", greet_user, pass_user_data=True))
-    dp.add_handler(CallbackQueryHandler(xur_keyboard, pass_user_data=True, pattern = 'Xur'))
+    dp.add_handler(CallbackQueryHandler(xur_keyboard, pass_user_data=True, pattern = 'xur'))
     dp.add_handler(CallbackQueryHandler(all_xur, pass_user_data=True, pattern = 'all_xur'))
     dp.add_handler(CallbackQueryHandler(xur_here, pass_user_data=True, pattern = 'xur_here'))
     dp.add_handler(CallbackQueryHandler(exotic_keyboard, pass_user_data=True, pattern = 'exotic'))

@@ -9,8 +9,7 @@ from events_keyboards import events_keyboard
 from armory import types_of_weapons_list
 from armory_keyboard import armory_keyboard, weapon_keyboard, light_ammo, special_ammo, heavy_ammo
 from exotic import get_exotic_armor, get_exotic_weapon
-from exotic_keyboard import warlock_exotic, titan_exotic, heavy_exotic, hunter_exotic, kinetic_exotic, energo_exotic, exotic_keyboard, exot_armor, exot_weapon
-
+from exotic_keyboard import *
 import settings
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',

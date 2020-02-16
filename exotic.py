@@ -4,6 +4,8 @@ from exotic_keyboard import e_weapon_menu, e_armor_menu
 
 def get_exotic_weapon(update, context):
     query = update.callback_query
+    user_text = query.message.text
+    print(user_text)
     weapon_name = query.data
     weapon = db.exotic_weapons.find_one({"eng_name": weapon_name}, {"eng_name":1, "name":1, "type":1, "rate_of_fire":1, "ammo":1, "catalyst":1, "drop":1, "_id":0 })
     context.bot.send_photo(chat_id=query.message.chat.id, photo = open('exotics/weapons/{}.jpg'.format(weapon['eng_name']), 'rb'))

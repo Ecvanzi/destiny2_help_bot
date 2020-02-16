@@ -6,8 +6,8 @@ from handlers import greet_user, main_keyboard, key_keyboard, xur_keyboard
 from xur import xur_here, all_xur, where_xur, xur_keyboard
 from events import get_event
 from events_keyboards import events_keyboard
-#from armory import *
-#from armory_keyboard import weapon_list
+from armory import types_of_weapons_list
+from armory_keyboard import armory_keyboard, weapon_keyboard, light_ammo, special_ammo, heavy_ammo
 from exotic import get_exotic_armor, get_exotic_weapon
 from exotic_keyboard import warlock_exotic, titan_exotic, heavy_exotic, hunter_exotic, kinetic_exotic, energo_exotic, exotic_keyboard, exot_armor, exot_weapon
 
@@ -23,14 +23,15 @@ def main():
     mybot = Updater(settings.API_KEY, request_kwargs = settings.PROXY, use_context=True)
     logging.info ('Бот запустился')
     dp = mybot.dispatcher
-    
+
     dp.add_handler(CommandHandler("start", greet_user, pass_user_data=True))
+    dp.add_handler(MessageHandler(Filters.regex('({})'.format(types_of_weapons_list)), greet_user, pass_user_data= True))
     dp.add_handler(CallbackQueryHandler(xur_keyboard, pass_user_data=True, pattern = 'xur'))
     dp.add_handler(CallbackQueryHandler(all_xur, pass_user_data=True, pattern = 'all_xur'))
     dp.add_handler(CallbackQueryHandler(xur_here, pass_user_data=True, pattern = 'xur_here'))
     dp.add_handler(CallbackQueryHandler(exotic_keyboard, pass_user_data=True, pattern = 'exotic'))
     #dp.add_handler(CallbackQueryHandler(, pass_user_data=True, pattern = 'raids'))
-    #dp.add_handler(CallbackQueryHandler(, pass_user_data=True, pattern = 'weapon_list'))
+    dp.add_handler(CallbackQueryHandler(armory_keyboard, pass_user_data=True, pattern = 'armory'))
     dp.add_handler(CallbackQueryHandler(events_keyboard, pass_user_data=True, pattern = 'events'))
     #dp.add_handler(CallbackQueryHandler(, pass_user_data=True, pattern = 'other'))
     dp.add_handler(CallbackQueryHandler(get_event, pass_user_data=True, pattern = 'glimmer_extraction'))

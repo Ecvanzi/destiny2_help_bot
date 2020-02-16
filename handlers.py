@@ -27,7 +27,7 @@ def main_keyboard(update):
         InlineKeyboardButton('(Не работает)Рейды', callback_data='raids')
         ],
         [
-        InlineKeyboardButton('(Не работает)Оружейная/Гардероб', callback_data='weapon_list'),
+        InlineKeyboardButton('Оружейная', callback_data='armory'),
         InlineKeyboardButton('Открытые мероприятия', callback_data='events'),
         InlineKeyboardButton('(Не работает)Другое', callback_data='other')
         ]

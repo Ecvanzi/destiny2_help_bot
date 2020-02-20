@@ -3,7 +3,6 @@ from celery.schedules import crontab
 
 from xur import where_xur, xur_weapon
 
-celery_app = Celery('task', broker='redis://localhost:6379/0')
 
 #@celery_app.on_after_configure.connect
 #def setup_periodic_tasks(sender, **kwargs):

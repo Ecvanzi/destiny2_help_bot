@@ -1,74 +1,153 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
+exotic_guns = ['sweet_business', 'vigilance_wing', 'sturm', 'rat_king',
+               'mida_multi_tool', 'crimson', 'jade_rabbit', 'huckleberry',
+               'suros', 'cerberus', 'wish_ender', 'malfeasance', 'chaperone',
+               'ace_of_spades', 'izanagis_burden', 'last_word', 'arbalest',
+               'thorn', 'monte_carlo', 'bad_juju', 'lumina', 'prometheus_lens',
+               'outbreak_perfected', 'coldheart', 'fighting_lion', 'sunshot',
+               'graviton_lance', 'merciless', 'skyburners_oath', 'riskrunner',
+               'hard_light', 'borealis', 'bastion', 'telesto', 'jotunn',
+               'polaris_lance', 'trinity_ghoul', 'wavesplitter', 'le_monarque',
+               'lord_of_wolves', 'tarrabah', 'erianas_vow', 'divinity',
+               'symmetry', 'devils_ruin', 'prospector', 'tractor_cannon',
+               'legend_of_acrius', 'darci', 'wardcliff_coil', 'worldline_zero',
+               'colony', 'sleeper_simulant', 'whisper_of_the_worm', 'anarchy',
+               'whisper_of_the_worm', 'one_thousand_voices', 'two_tailed_fox',
+               'queenbreaker', 'thunderlord', 'deathbringer', 'truth',
+               'xenophage', 'leviathans_breath']
+
+
+exotic_armor = ['insurmountable_skullfort', 'mask_of_the_quiet_one',
+                'khepris_horn', 'helm_of_saint14', 'eternal_warrior',
+                'one_eyed_mask', 'feedback_fence', 'doom_fang_pauldron',
+                'synthoceps', 'aeon_safe', 'ashen_wake', 'wormgod_caress',
+                'ursa_furiosa', 'stronghold', 'crest_of_alpha_lupi',
+                'actium_war_rig', 'hallowfire_heart', 'armamentarium',
+                'heart_of_inmost_light', 'severance_enclosure', 'lion_rampant',
+                'peacekeepers', 'dunemarchers', 'mk44_stand_asides',
+                'antaeus_wards', 'peregrine_greaves', 'phoenix_cradle',
+                'skull_of_dire_ahamkara', 'crown_of_tempests', 'stag',
+                'eye_of_another_world', 'nezarecs_sin', 'veritys_brow',
+                'apotheosis_veil', 'astrocyte_verse', 'sunbracers',
+                'karnstein_armlets', 'winters_guile', 'aeon_soul',
+                'ophidian_aspect', 'claws_of_ahamkara', 'contraverse_hold',
+                'getaway_artist', 'starfire_protocol', 'wings_of_sacred_dawn',
+                'vesper_of_radius', 'sanguine_alchemy', 'chromatic_fire',
+                'phoenix_protocol', 'stormdancers_brace', 'transversive_steps',
+                'lunafaction_boots', 'geomag_stabilizers', 'promethium_spur',
+                'knucklehead_radar', 'celestial_nighthawk', 'foetracer',
+                'graviton_forfeit', 'wormhusk_crown', 'assassins_cowl',
+                'young_ahamkaras_spine', 'mechaneers_tricksleeves',
+                'aeon_swift', 'shinobus_vow', 'sealed_ahamkara_grasps',
+                'shards_of_galanor', 'oathkeeper', 'liars_handshake',
+                'khepris_sting', 'raiden_flux', 'lucky_raspberry',
+                'dragons_shadow', 'ophidia_spathe', 'gwisin_vest',
+                'sixth_coyote', 'lucky_pants', 'orpheus_rig', 'stomp_ee5',
+                'gemini_jester', 'frost_ee5', 'bombardiers']
+
 
 def exotic_keyboard(update, context):
     query = update.callback_query
     keyboard = [
         [
-        InlineKeyboardButton('Оружие', callback_data='exot_weapon_keyboard'),
-        InlineKeyboardButton('Броня', callback_data='exot_armor_keyboard')
+         InlineKeyboardButton('Оружие',
+                              callback_data='exot_weapon_keyboard'),
+         InlineKeyboardButton('Броня',
+                              callback_data='exot_armor_keyboard')
         ],
-        [InlineKeyboardButton('Главное меню', callback_data='key_keyboard')]
+        [InlineKeyboardButton('Главное меню',
+                              callback_data='key_keyboard')]
         ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    context.bot.send_message(chat_id=query.message.chat.id, message_id= query.message.message_id, text ='Выбирай раздел:', reply_markup = reply_markup)
- 
+    context.bot.send_message(chat_id=query.message.chat.id,
+                             message_id=query.message.message_id,
+                             text='Выбирай раздел:',
+                             reply_markup=reply_markup)
+
 
 def exot_weapon(update, context):
     query = update.callback_query
     keyboard = [
         [
-        InlineKeyboardButton('Кинетическое оружие', callback_data='kinetic_exotic'),
-        InlineKeyboardButton('Энергитическое оружие', callback_data='energo_exotic'),
-        InlineKeyboardButton('Силовое оружие', callback_data='heavy_exotic')
+         InlineKeyboardButton('Кинетическое оружие',
+                              callback_data='kinetic_exotic'),
+         InlineKeyboardButton('Энергитическое оружие',
+                              callback_data='energo_exotic'),
+         InlineKeyboardButton('Силовое оружие',
+                              callback_data='heavy_exotic')
         ],
         [
-        InlineKeyboardButton('Назад', callback_data='exotic_keyboard'),
-        InlineKeyboardButton('Главное меню', callback_data='key_keyboard')
+         InlineKeyboardButton('Назад',
+                              callback_data='exotic_keyboard'),
+         InlineKeyboardButton('Главное меню',
+                              callback_data='key_keyboard')
         ]
         ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    context.bot.send_message(chat_id=query.message.chat.id, text = 'Выбирай тип оружия или иди обратно:', reply_markup = reply_markup)
+    context.bot.send_message(chat_id=query.message.chat.id,
+                             text='Выбирай тип оружия или иди обратно:',
+                             reply_markup=reply_markup)
+
 
 def exot_armor(update, context):
     query = update.callback_query
     keyboard = [
         [
-        InlineKeyboardButton('Экзоты титанов', callback_data='titan_exotic'),
-        InlineKeyboardButton('Экзоты варлоков', callback_data='warlock_exotic'),
-        InlineKeyboardButton('Экзоты охотников', callback_data='hunter_exotic')
+         InlineKeyboardButton('Экзоты титанов',
+                              callback_data='titan_exotic'),
+         InlineKeyboardButton('Экзоты варлоков',
+                              callback_data='warlock_exotic'),
+         InlineKeyboardButton('Экзоты охотников',
+                              callback_data='hunter_exotic')
         ],
         [
-        InlineKeyboardButton('Назад', callback_data='exotic_keyboard'),
-        InlineKeyboardButton('Главное меню', callback_data='key_keyboard')
+         InlineKeyboardButton('Назад',
+                              callback_data='exotic_keyboard'),
+         InlineKeyboardButton('Главное меню',
+                              callback_data='key_keyboard')
         ]
         ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    context.bot.send_message(chat_id=query.message.chat.id, text = 'Выбирай класс или иди обратно:', reply_markup = reply_markup)
+    context.bot.send_message(chat_id=query.message.chat.id,
+                             text='Выбирай класс или иди обратно:',
+                             reply_markup=reply_markup)
+
 
 def e_weapon_menu(update, context):
     query = update.callback_query
     keyboard = [
         [
-        InlineKeyboardButton('Назад', callback_data='exot_weapon'),
-        InlineKeyboardButton('К выбору раздела', callback_data='exotic_keyboard'),
-        InlineKeyboardButton('Главное меню', callback_data='key_keyboard')
+         InlineKeyboardButton('Назад',
+                              callback_data='exot_weapon'),
+         InlineKeyboardButton('К выбору раздела',
+                              callback_data='exotic_keyboard'),
+         InlineKeyboardButton('Главное меню',
+                              callback_data='key_keyboard')
         ]
         ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    context.bot.send_message(chat_id=query.message.chat.id, text = 'Куда дальше?', reply_markup = reply_markup)
+    context.bot.send_message(chat_id=query.message.chat.id,
+                             text='Куда дальше?',
+                             reply_markup=reply_markup)
+
 
 def e_armor_menu(update, context):
     query = update.callback_query
     keyboard = [
         [
-        InlineKeyboardButton('Назад', callback_data='exot_armor'),
-        InlineKeyboardButton('К выбору раздела', callback_data='exotic_keyboard'),
-        InlineKeyboardButton('Главное меню', callback_data='key_keyboard')
+         InlineKeyboardButton('Назад',
+                              callback_data='exot_armor'),
+         InlineKeyboardButton('К выбору раздела',
+                              callback_data='exotic_keyboard'),
+         InlineKeyboardButton('Главное меню',
+                              callback_data='key_keyboard')
         ]
         ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    context.bot.send_message(chat_id=query.message.chat.id, text = 'Куда дальше?', reply_markup = reply_markup)
+    context.bot.send_message(chat_id=query.message.chat.id,
+                             text='Куда дальше?',
+                             reply_markup=reply_markup)
 
 
 def kinetic_exotic(update, context):

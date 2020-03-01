@@ -1,10 +1,11 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
+
 def armory_keyboard(update, context):
     query = update.callback_query
     keyboard = [
         [
-        InlineKeyboardButton('Знаю что мне нужно', callback_data='i_know_weapon'),
+        InlineKeyboardButton('Знаю что мне нужно', callback_data='i_know_what_i_want'),
         InlineKeyboardButton('Не знаю что мне нужно', callback_data='weapon_keyboard')
         ],
         [
@@ -13,6 +14,7 @@ def armory_keyboard(update, context):
         ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     context.bot.send_message(chat_id=query.message.chat.id, message_id= query.message.message_id, text ='Выбирай раздел:', reply_markup = reply_markup)
+
 
 def weapon_keyboard(update, context):
     query = update.callback_query
@@ -29,6 +31,7 @@ def weapon_keyboard(update, context):
         ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     context.bot.send_message(chat_id=query.message.chat.id, message_id= query.message.message_id, text ='Выбирай раздел:', reply_markup = reply_markup)
+
 
 def light_ammo(update, context):
     query = update.callback_query
@@ -57,6 +60,7 @@ def light_ammo(update, context):
     reply_markup = InlineKeyboardMarkup(keyboard)
     context.bot.send_message(chat_id=query.message.chat.id, message_id= query.message.message_id, text ='Выбирай раздел:', reply_markup = reply_markup)
 
+
 def special_ammo(update, context):
     query = update.callback_query
     keyboard = [
@@ -76,6 +80,7 @@ def special_ammo(update, context):
         ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     context.bot.send_message(chat_id=query.message.chat.id, message_id= query.message.message_id, text ='Выбирай раздел:', reply_markup = reply_markup)
+
 
 def heavy_ammo(update, context):
     query = update.callback_query
